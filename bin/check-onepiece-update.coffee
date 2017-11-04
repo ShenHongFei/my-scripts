@@ -1,5 +1,6 @@
 ###
-cd Scripts
+cd D:/Scripts
+coffee bin/check-onepiece-update.coffee
 yarn add coffeescript
 yarn add request
 yarn add request-promise-native
@@ -8,7 +9,8 @@ yarn add undersco
 ###
 request=require('request-promise-native')
 require('sugar').extend()
-html=await request.get('http://btbtt.org/thread-index-fid-981-tid-4349164.htm')
+html=(()=>await(request.get('http://btbtt.org/thread-index-fid-981-tid-4349164.htm')))()
+console.log(typeof html)
 str2reg_map=
     '[':'\\['
     ']':'\\]'
