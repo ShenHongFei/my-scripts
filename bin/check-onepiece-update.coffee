@@ -9,8 +9,7 @@ yarn add undersco
 ###
 request=require('request-promise-native')
 require('sugar').extend()
-html=(()=>await(request.get('http://btbtt.org/thread-index-fid-981-tid-4349164.htm')))()
-console.log(typeof html)
+html=await request.get('http://btbtt.org/thread-index-fid-981-tid-4349164.htm')
 str2reg_map=
     '[':'\\['
     ']':'\\]'
