@@ -1,2 +1,4 @@
 require('copy-paste').global()
-copy require('js2coffee').build(paste()).code
+js2coffee=require('js2coffee')
+coffee_src=js2coffee.build(paste(),{indent:4}).code
+copy(coffee_src)

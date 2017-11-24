@@ -14,10 +14,3 @@ submit_button.parentNode.insertAdjacentHTML('beforeend',`<button type="button" o
 if(unsafeWindow){
     unsafeWindow.change_password=change_password
 }
-
-/*
-const change_button=document.createElement('button')
-change_button.setAttribute('type','button')
-change_button.textContent='改掉密码'
-change_button.onclick=change_password()
-*/
