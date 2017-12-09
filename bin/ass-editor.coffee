@@ -64,24 +64,23 @@ style_viewer=
         line
         
 # --------------- 常用功能 -----------------------
-view_style_of_file=(file='D:/樱花庄的宠物女孩/01.ass')->
+view_style_of_file=(file='')->
     process_matched_lines read_lines(file),style_viewer
     
     
 # 修改单个ass字幕
-change_style_of_file=(file='D:/樱花庄的宠物女孩/01.ass')->
+change_style_of_file=(file='',line_processors...)->
     lines=read_lines(file)
-    lines=process_matched_lines lines,string_remover,style_changer
+    lines=process_matched_lines lines,line_processors...
     console.log "#{lines.length} processed"
     write_lines(lines,file)
 
-batch_change_file_styles=(src_dir,file_pattern=/.ass$/)->
-    for file in fs.readdirSync(dir)
+batch_change_file_styles=(src_dir='D:\\さくら荘のペットな彼女',file_pattern=/.ass$/)->
+    for file in fs.readdirSync(src_dir)
         if file_pattern.test file
             console.log file
-            change_style_of_file(file)
+            change_style_of_file(src_dir+'/'+file,style_changer)
     return
 
 # --------------- main -----------------------
-change_style_of_file(file='D:/樱花庄的宠物女孩/01.ass')
-#view_style_of_file(file='D:/樱花庄的宠物女孩/01.ass')
+#batch_change_file_styles()
