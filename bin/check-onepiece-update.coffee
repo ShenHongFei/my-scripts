@@ -14,7 +14,7 @@ cheerio=require('cheerio')
     # title='[Skytree][ONE PIECE 海贼王][786][X264][1080P][GB_BIG5_JP][MP4][CRRIP][简繁日中日双语内挂字幕].torrent'
     torrent_links=$('a').filter ->
         this.title=this.childNodes.last()?.data
-        if !this.title?.match(/海贼王.*\.torrent/)
+        if !this.title?.match(/海贼王.*\[1080P\].*\.torrent/)
             return false
         this.href='http://btbtt.co/'+this.attribs['href']
         this.episode=this.title.match(/\[(\d{3})\]/)?[1]

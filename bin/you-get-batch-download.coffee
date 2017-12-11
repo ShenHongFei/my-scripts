@@ -1,14 +1,14 @@
-get_from_chrome=->
-    video_links=$('.video-list').find('a.title').map (i,e)->'http:'+e.getAttribute('href')
-        .get()
-    copy(JSON.stringify(video_links))
-    
+# get_in_chrome
+links=$('.video-list').find('a.title').map (i,e)->'http:'+e.getAttribute('href')
+    .get()
+copy(JSON.stringify(links))
 
 titles=$('#plist').children().map (i,e)->
     e.textContent
 titles=titles.toArray()
 copy(JSON.stringify(titles))
-    
+
+# rename videos
 require('sugar').extend()
 titles=["1、01.语法","2、02.动词1","3、03.动词2","4、04.动词3","5、05.は、が、を","6、06.の","7、07.へ、に、で","8、08.も、と","9、09.か、や","10、10.し","11、11.から、まで、より","12、12.から、ので","13、13.が、のに","14、14.ても、でも、とも、ども","15、15.だけ、のみ、しか、ばかり","16、16.すら、さえ、こそ","17、17.と、ば、たら、なら","18、18.ずつ、つつ","19、19.のです","20、20.总结","21、001.名词1","22、002.名词2","23、003.名词3","24、004.本身","25、005.比较","26、006.并不是","27、007.并列","28、008.不","29、009.不~不行","30、010.不可以","31、011.不仅~而且~","32、012.不管，尽管","33、013.不管是~还是~","34、014.不得不","35、015.不顾，顾忌到","36、016.不管怎么说","37、017.不愧是","38、018.不停地","39、019.不由得","40、020.不用说","41、021.差点儿就","42、022.程度，数量","43、023.程度","44、024.从","45、025.充满","46、026.除了~以外","47、027.代替","48、028.当成","49、029.到…地步","50、030.定义","51、031.动作的终结","52、032.对比","53、033.放置不管","54、034.非常，极其","55、035.反复做","56、036.方法","57、037.方面","58、038.符合","59、039.感叹","60、040.刚","61、041.根据，按照","62、042.关于，对于","63、043.关于「済む","64、044.关于「いる」","65、045.关于「つもり」","66、046.关于使役被动","67、047.关于「すら、さえ、こそ」","68、048.关于「こと、ひと、もの、と","69、049.关于五个基础语法点","70、050.过于","71、051.过程","72、052.好不容易","73、053.好像①","74、054.好像②","75、055.好像③","76、056.即使～也不～","77、057.既然","78、058.假设","79、059.结果","80、060.经历","81、061.尽量","82、062.举例","83、063.决定","84、064.决心","85、065.觉得","86、066.开端，契机","87、067.可能性","88、068.肯定","89、069.累加","90、070.历经","91、071.没有必要","92、072.每","93、073.每次","94、074.面向","95、075.难道是","96、076.期限","97、077.强调","98、078.倾向","99、079.轻视","100、080.全是","101、081.确认","102、082.容易…；难…","103、083.如果","104、084.如果不…，就…","105、085.时候","106、086.随着","107、087.顺便","108、088.特别","109、089.听说","110、090.同时","111、091.痛快地","112、092.为了","113、093.无意识","114、094.相反","115、095.想做","116、096.形容词变名词","117、097.形容状态","118、098.也就是说","119、099.一边~一边","120、100.与~一起","121、101.一~就~","122、102.应该，必须","123、103.（没）有做~的意思","124、104.又不是~","125、105.与~有关","126、106.越~越~","127、107.原因","128、108.在","129、109.在~之后","130、110.在~之前","131、111.正在","132、112.值得做","133、113.只要","134、114.只是、只有","135、115.状态","136、116.转折","137、117.最好","138、118.最后","139、119.做得困难","140、120.作为"]
 for title,i in titles
@@ -21,14 +21,18 @@ for f in fs.readdirSync(dir)
     parts=f.split('.')
     fs.renameSync(dir+'\\'+f,dir+'\\'+parts[0]+' '+titles[parts[0]]+'.'+parts[1])
 
-video_links=["http://www.bilibili.com/video/av16378225","http://www.bilibili.com/video/av16378209","http://www.bilibili.com/video/av16378187","http://www.bilibili.com/video/av16378170","http://www.bilibili.com/video/av16378148","http://www.bilibili.com/video/av16378128","http://www.bilibili.com/video/av16378112","http://www.bilibili.com/video/av16378087","http://www.bilibili.com/video/av16378055","http://www.bilibili.com/video/av16378030","http://www.bilibili.com/video/av16377923"]
-video_links=video_links.reverse()
+# batch you-get
+links=["http://www.bilibili.com/video/av16378225","http://www.bilibili.com/video/av16378209","http://www.bilibili.com/video/av16378187","http://www.bilibili.com/video/av16378170","http://www.bilibili.com/video/av16378148","http://www.bilibili.com/video/av16378128","http://www.bilibili.com/video/av16378112","http://www.bilibili.com/video/av16378087","http://www.bilibili.com/video/av16378055","http://www.bilibili.com/video/av16378030","http://www.bilibili.com/video/av16377923"]
+links=links.reverse()
+links=['https://bangumi.bilibili.com/anime/2543/play#107660','https://bangumi.bilibili.com/anime/2543/play#107659']
 cp=require('child_process')
-for link in video_links
+for link in links
     done=false
     while !done
         try
-            cp.execSync("you-get #{link}", {stdio:[0,1,2],cwd:'D:/Git 教程',encoding:'utf-8'})
+            cp.execSync("you-get #{link}", {stdio:[0,1,2],cwd:'D:/',encoding:'utf-8'})
             done=true
         catch any
     
+# simply retry until download successfully
+cp.execSync("you-get https://www.bilibili.com/video/av7886139/index_32.html -s 127.0.0.1:1080", {stdio:[0,1,2],cwd:'D:/',encoding:'utf-8'})
